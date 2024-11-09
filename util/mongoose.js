@@ -7,10 +7,10 @@ export function connect(url) {
   return mongoose.connect(url);
 }
 
-export function buildModels({ models }) {
-  Object.keys(models).forEach(key => {
+export function buildModels({ schemas }) {
+  Object.keys(schemas).forEach(key => {
     MODELS[key] = {
-      model: model(key, new Schema(models[key])),
+      model: model(key, new Schema(schemas[key])),
     };
 
     MODELS[key].findAll = () => MODELS[key].model.find({});
@@ -57,8 +57,8 @@ function confirmRouteRegistration(method, route) {
   console.log(`${method}: ${route}`);
 }
 
-export async function buildRoutes({ app, models, apiRoot }) {
-  Object.keys(models).forEach(key => {
+export async function buildRoutes({ app, schemas, apiRoot }) {
+  Object.keys(schemas).forEach(key => {
     const route = `${apiRoot}/${pluralize(key.toLowerCase(), 0)}`;
 
     console.log(`\nRegistering routes for collection: ${key.toUpperCase()}\n`);

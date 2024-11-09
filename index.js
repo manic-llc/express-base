@@ -13,15 +13,18 @@ export default async (configuration = {}) => {
     trustProxy,
     httpsRedirect,
     middleware,
-    models,
+    schemas,
   } = parseConfig(configuration || {});
 
   const app = express();
 
   await connect(DATABASE);
 
-  buildModels({ models });
-  buildRoutes({ app, models, apiRoot });
+  schemas &&
+    (() => {
+      buildModels({ schemas });
+      buildRoutes({ app, schemas, apiRoot });
+    })();
 
   const IS_PRODUCTION = NODE_ENV === 'production';
 
