@@ -53,7 +53,7 @@ export default async (configuration = {}) => {
   if (IS_PRODUCTION) {
     app.set('trust proxy', trustProxy);
     app.use((req, res, next) => {
-      httpsRedirect && req.headers.host.protocol !== 'https' && res.redirect(301, `https://${host}${req.url}`);
+      httpsRedirect && req.headers.host.protocol !== 'https' && res.redirect(301, `https://${req.headers.host}${req.url}`);
       next();
     });
     app.use(express.static(staticDirectory));
