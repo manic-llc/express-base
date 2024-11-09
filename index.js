@@ -60,14 +60,12 @@ export default async (configuration = {}) => {
   }
 
   app.get('*', async (req, res) => {
-    const {
-      httpResponse: { body, statusCode, headers },
-    } = await renderPage({
+    const response = await renderPage({
       urlOriginal: req.originalUrl,
       headersOriginal: req.headers,
     });
 
-    headers.forEach(([name, value]) => res.setHeader(name, value));
+    response.httpResponse.headers.forEach(([name, value]) => res.setHeader(name, value));
     res.status(statusCode).send(body);
   });
 
