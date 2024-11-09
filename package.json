@@ -1,0 +1,39 @@
+{
+  "name": "@wearemanic/express-base",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Common/shared configuration for Express.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/manic-llc/express-base.git"
+  },
+  "keywords": [
+    "express",
+    "boilerplate",
+    "config"
+  ],
+  "author": "Zach Winter (zach@manic.llc)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/manic-llc/express-base/issues"
+  },
+  "homepage": "https://github.com/manic-llc/express-base#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "compression": "^1.7.5",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "geoip-lite": "^1.4.10",
+    "helmet": "^8.0.0",
+    "langchain": "^0.3.5",
+    "mongoose": "^8.8.1",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "vike": "^0.4.201"
+  }
+}
