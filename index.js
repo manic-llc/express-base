@@ -12,8 +12,8 @@ import S3 from '@wearemanic/express-s3';
 const PLUGINS = {
   '@wearemanic/express-spotify-oauth': SpotifyOauth,
   '@wearemanic/express-stripe-payments': StripePayments,
+  '@wearemanic/express-s3': S3,
   '@wearemanic/express-twilio-verify': OTP,
-  '@wearemanic/s3': S3,
 };
 
 export default async (configuration = {}) => {
