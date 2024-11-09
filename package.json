@@ -1,7 +1,7 @@
 {
   "name": "@wearemanic/express-base",
   "type": "module",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Common/shared configuration for Express.",
   "main": "index.js",
   "scripts": {
@@ -23,6 +23,10 @@
   },
   "homepage": "https://github.com/manic-llc/express-base#readme",
   "dependencies": {
+    "@wearemanic/express-spotify-oauth": "file:../express-spotify-oauth",
+    "@wearemanic/express-stripe-payments": "file:../express-stripe-payments",
+    "@wearemanic/express-twilio-verify": "file:../express-twilio-verify",
+    "@wearemanic/express-s3": "file:../express-s3",
     "bcrypt": "^5.1.1",
     "compression": "^1.7.5",
     "cors": "^2.8.5",

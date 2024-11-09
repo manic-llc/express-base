@@ -13,7 +13,9 @@ export function buildModels({ schemas }) {
       model: model(key, new Schema(schemas[key])),
     };
 
-    MODELS[key].findAll = () => MODELS[key].model.find({});
+    MODELS[key].find = (data = {}) => MODELS[key].model.find(data);
+
+    MODELS[key].findOne = data => MODELS[key].model.findOne(data);
 
     MODELS[key].findById = id => MODELS[key].model.findById(id);
 
@@ -65,7 +67,8 @@ export async function buildRoutes({ app, schemas, apiRoot }) {
 
     app.get(route, async (req, res) => {
       try {
-        const documents = await MODELS[key].findAll();
+        console.log(route, req.query);
+        const documents = await MODELS[key].find(req.query || {});
         res.status(200).send(documents);
       } catch (e) {
         res.status(500).send(e);

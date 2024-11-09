@@ -1,7 +1,7 @@
 import { resolve } from './directories.js';
 
 export function parseConfig(configuration = {}) {
-  const { env, staticDirectory, apiRoot, trustProxy, httpsRedirect, middleware, models } = {
+  const { env, staticDirectory, apiRoot, trustProxy, httpsRedirect, middleware, schemas, plugins } = {
     apiRoot: configuration.apiRoot || '/api',
     staticDirectory: configuration?.staticDirectory || resolve(import.meta.url, '../dist/client'),
     trustProxy: typeof configuration?.trustProxy === 'boolean' ? configuration.trustProxy : true,
@@ -22,7 +22,8 @@ export function parseConfig(configuration = {}) {
       },
     },
     env: configuration.env || {},
-    models: configuration.models || {},
+    schemas: configuration.schemas || {},
+    plugins: configuration.plugins || {},
   };
 
   return {
@@ -32,6 +33,7 @@ export function parseConfig(configuration = {}) {
     trustProxy,
     httpsRedirect,
     middleware,
-    models,
+    schemas,
+    plugins,
   };
 }

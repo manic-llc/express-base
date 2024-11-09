@@ -4,6 +4,17 @@ import morgan from 'morgan';
 import cors from 'cors';
 import { renderPage } from 'vike/server';
 import { parseConfig, connect, buildModels, buildRoutes } from './util/index.js';
+import SpotifyOauth from '@wearemanic/express-spotify-oauth';
+import StripePayments from '@wearemanic/express-stripe-payments';
+import OTP from '@wearemanic/express-twilio-verify';
+import S3 from '@wearemanic/express-s3';
+
+const PLUGINS = {
+  '@wearemanic/express-spotify-oauth': SpotifyOauth,
+  '@wearemanic/express-stripe-payments': StripePayments,
+  '@wearemanic/express-twilio-verify': OTP,
+  '@wearemanic/s3': S3,
+};
 
 export default async (configuration = {}) => {
   const {
@@ -14,6 +25,7 @@ export default async (configuration = {}) => {
     httpsRedirect,
     middleware,
     schemas,
+    plugins,
   } = parseConfig(configuration || {});
 
   const app = express();
@@ -32,6 +44,11 @@ export default async (configuration = {}) => {
   app.use(morgan(middleware.morgan.format, middleware.morgan.options));
   app.use(express.json(middleware.json));
   app.use(cors(middleware.cors));
+
+  Object.keys(plugins).forEach(key => {
+    const config = plugins[key];
+    PLUGINS[key](app, config);
+  });
 
   if (IS_PRODUCTION) {
     app.set('trust proxy', trustProxy);
